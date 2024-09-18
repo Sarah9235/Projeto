@@ -12,6 +12,8 @@ import ControleLivros from "../dashboard/ControleLivros";
 import EditarLivros from "../dashboard/EditarLivros";
 import MinhaBiblioteca from "../biblioteca/MinhaBiblioteca";
 import Login from "../components/Login";
+import ResenhaLivro from "../resenhas/ResenhaLivro";
+import Cadastro from "../components/Cadastro";
 
 const router = createBrowserRouter([
   {
