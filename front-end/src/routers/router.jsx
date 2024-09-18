@@ -14,7 +14,6 @@ import MinhaBiblioteca from "../biblioteca/MinhaBiblioteca";
 import Login from "../components/Login";
 import RotaPrivada from "../rotaPrivada/rotaPrivada";
 import Cadastro from "../components/Cadastro";
-import Logout from "../components/Logout";
 import ResenhaLivro from "../resenhas/ResenhaLivro";
 
 
@@ -77,10 +76,6 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />
-  },
-  {
-    path: "/logout",
-    element: <Logout />
   }
 ]);
 

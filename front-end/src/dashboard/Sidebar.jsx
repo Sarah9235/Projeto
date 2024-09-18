@@ -1,9 +1,22 @@
 import { Sidebar } from "flowbite-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaHome, FaBookOpen, FaSignOutAlt } from 'react-icons/fa';
 import logo from '/logo.png';
+import { getAuth, signOut } from "firebase/auth"; // Importe o Firebase Auth
 
 const SideBar = () => {
+    const navigate = useNavigate();
+    const auth = getAuth();
+
+    const handleLogout = async () => {
+        try {
+            await signOut(auth); // Faz o logout no Firebase
+            navigate("/login");  // Redireciona o usuário para a página de login
+        } catch (error) {
+            console.error("Erro ao fazer logout: ", error);
+        }
+    };
+
     return (
         <Sidebar aria-label="Sidebar with logo branding example" className="bg-gray-50 text-white">
             <Link to="/" className='flex items-center gap-2 px-4 py-2 text-xl font-bold rounded-md'>
@@ -31,8 +44,8 @@ const SideBar = () => {
                     </Sidebar.Item>
 
                     <Sidebar.Item 
-                        as={Link} 
-                        to="/logout" 
+                        as="button" 
+                        onClick={handleLogout}  // Chama a função de logout
                         icon={FaSignOutAlt} 
                         className="hover:bg-purple-200 rounded-md flex items-center gap-2 px-4 py-2"
                     >
@@ -41,7 +54,7 @@ const SideBar = () => {
                 </Sidebar.ItemGroup>
             </Sidebar.Items>
         </Sidebar>
-    )
-}
+    );
+};
 
 export default SideBar;
