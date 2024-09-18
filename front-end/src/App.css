@@ -1,0 +1,7 @@
+header, nav{
+    z-index: 100001 !important;
+}
+.swiper-button-next,
+.swiper-button-prev {
+    display: none !important;
+}
