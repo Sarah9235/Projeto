@@ -12,10 +12,6 @@ import ControleLivros from "../dashboard/ControleLivros";
 import EditarLivros from "../dashboard/EditarLivros";
 import MinhaBiblioteca from "../biblioteca/MinhaBiblioteca";
 import Login from "../components/Login";
-import RotaPrivada from "../rotaPrivada/rotaPrivada";
-import Cadastro from "../components/Cadastro";
-import ResenhaLivro from "../resenhas/ResenhaLivro";
-
 
 const router = createBrowserRouter([
   {
@@ -52,7 +48,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/admin/dashboard",
-        element: <RotaPrivada>  <Dashboard />  </RotaPrivada>
+        element:  <Dashboard />  
       },
       {
         path: "/admin/dashboard/upload",
