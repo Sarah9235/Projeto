@@ -1,68 +1,46 @@
 import React, { createContext, useState, useEffect } from 'react';
-import app from '../firebase/firebase.config'; // Importa a configuração do Firebase
+import app from '../firebase/firebase.config';
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-// Importa as funções de autenticação do Firebase
 
-// Cria um contexto para compartilhar o estado de autenticação globalmente
-export const AuthContext = createContext();
+export const AuthContext = createContext(); // Cria o contexto de autenticação
 
-// Inicializa o serviço de autenticação do Firebase
-const auth = getAuth(app);
-
-// Configura o provedor de autenticação do Google
-const googleProvider = new GoogleAuthProvider();
+const auth = getAuth(app); // Inicializa o serviço de autenticação do Firebase
+const googleProvider = new GoogleAuthProvider(); // Configura o login com Google
 
 const AuthProvider = ({ children }) => {
-    // Define o estado local para o usuário autenticado e o estado de carregamento
-    const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [user, setUser] = useState(null); // Estado para o usuário autenticado
+    const [loading, setLoading] = useState(true); // Estado de carregamento
 
-    // Função para criar um novo usuário com email e senha
     const createUser = (email, password) => {
-        setLoading(true); // Define o estado de carregamento como verdadeiro durante a criação do usuário
-        return createUserWithEmailAndPassword(auth, email, password); 
-        // Chama a função do Firebase para criar o usuário
+        setLoading(true);
+        return createUserWithEmailAndPassword(auth, email, password); // Cria um novo usuário
     };
 
-    // Função para fazer login com o Google via popup
     const loginComGoogle = () => {
-        setLoading(true); // Inicia o estado de carregamento
-        return signInWithPopup(auth, googleProvider); 
-        // Chama o Firebase para fazer login usando o Google
+        setLoading(true);
+        return signInWithPopup(auth, googleProvider); // Faz login com Google
     };
 
-    // Função para fazer login com email e senha
     const login = (email, senha) => {
-        setLoading(true); // Define o estado de carregamento enquanto realiza o login
-        return signInWithEmailAndPassword(auth, email, senha); 
-        // Autentica o usuário com email e senha
+        setLoading(true);
+        return signInWithEmailAndPassword(auth, email, senha); // Login com email e senha
     }
 
-    // Monitora mudanças no estado de autenticação (ex: login/logout)
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            // Atualiza o estado de 'user' com o usuário atual quando ele faz login
-            setUser(currentUser);
-            setLoading(false); // Para o carregamento quando a autenticação é resolvida
+            setUser(currentUser); // Monitora mudanças no estado de autenticação
+            setLoading(false);
         });
-
-        // Retorna uma função que limpa a subscrição ao desmontar o componente, prevenindo vazamentos de memória
-        return () => unsubscribe();
+        return () => unsubscribe(); // Limpa a subscrição para evitar vazamentos
     }, []);
 
-    // Objeto contendo o estado e funções de autenticação que serão passados para os componentes filhos
     const authInfo = {
-        user, // O usuário autenticado (ou null se não houver)
-        createUser, // Função para criar um novo usuário
-        loginComGoogle, // Função para login com Google
-        loading, // Estado de carregamento
-        login // Função para login com email e senha
+        user, createUser, loginComGoogle, loading, login // Funções e estado de autenticação
     };
 
     return (
-        // O AuthContext.Provider envolve todos os componentes filhos e fornece o valor de authInfo para eles
         <AuthContext.Provider value={authInfo}>
-            {children} {/* Renderiza os componentes filhos que consomem o contexto */}
+            {children} {/* Renderiza os componentes filhos */}
         </AuthContext.Provider>
     );
 };

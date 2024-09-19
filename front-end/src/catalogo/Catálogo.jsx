@@ -8,7 +8,7 @@ const Catalogo = () => {
   const [romance, setRomance] = useState([]);
   const [distopia, setDistopia] = useState([]);
   const [aventura, setAventura] = useState([]);
-  const [comedia, setComedia] = useState([]);
+  // const [comedia, setComedia] = useState([]);
   const [infantil, setInfantil] = useState([]);
   const [searchTerm, setSearchTerm] = useState(''); // Estado para armazenar o termo de pesquisa
 
@@ -31,7 +31,7 @@ const Catalogo = () => {
     fetchLivros("Romance", setRomance);
     fetchLivros("Distopia", setDistopia);
     fetchLivros("Aventura", setAventura);
-    fetchLivros("Comédia", setComedia);
+    // fetchLivros("Comédia", setComedia);
     fetchLivros("Infantil", setInfantil);
   }, []); // Array vazio indica que a função será chamada apenas uma vez ao montar o componente
 
@@ -81,8 +81,8 @@ const Catalogo = () => {
         {/* Carrossel de livros de Aventura */}
         {aventura.length > 0 && <LivroCards headline="Aventura" livros={filtroLivros(aventura)} />}
 
-        {/* Carrossel de livros de Comédia */}
-        {comedia.length > 0 && <LivroCards headline="Comédia" livros={filtroLivros(comedia)} />}
+        {/* Carrossel de livros de Comédia
+        {comedia.length > 0 && <LivroCards headline="Comédia" livros={filtroLivros(comedia)} />} */}
 
         {/* Carrossel de livros Infantis */}
         {infantil.length > 0 && <LivroCards headline="Infantil" livros={filtroLivros(infantil)} />}
