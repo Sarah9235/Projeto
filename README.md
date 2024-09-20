@@ -63,9 +63,8 @@ http://localhost:5173
 
 ## 🚀 Tecnologias que eu usei
 
-- **Front-end:** Vite React, Tailwind CSS, Flowbite-React
+- **Front-end:** Vite React, Tailwind CSS, Flowbite-React, Swiper.js
 - **Back-end:** Nodemon, Express 
 - **Autenticação:** Firebase
-- **Carrossel de livros:** Swiper.js
 
 
